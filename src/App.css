@@ -1,9 +1,9 @@
 .App {
-  text-align: center;
+  background-color: #282c34;
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 20vmin;
   pointer-events: none;
 }
 
@@ -35,4 +35,13 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.Home {
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  min-height: 100vh;
 }
