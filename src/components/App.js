@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import { Route, BrowserRouter } from 'react-router-dom';
 import Home from './Home';
+import JoinRoom from './JoinRoom';
+import MemberRoom from './MemberRoom';
 
 class App extends React.Component{
 
@@ -11,15 +13,12 @@ class App extends React.Component{
     return (
       <div className="App">
         <BrowserRouter>
-          <Route exact path="/">
-            <Home/>
+          <Route exact path="/" component={Home}>
+            {/* <Home/> */}
           </Route>
-          <Route exact path="/join">
-
-          </Route>
-          <Route exact path="/host">
-
-          </Route>
+          <Route exact path="/join" component={JoinRoom}/>
+          <Route exact path="/join/:id" component={MemberRoom}/>
+          <Route exact path="/host/:id"/>
         </BrowserRouter>
       </div>
     );

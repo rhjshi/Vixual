@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import "./App.css";
-import reactLogo from "./logo.svg";
+import reactLogo from "../logo.svg";
 
 class Home extends React.Component{
     constructor(props){
@@ -28,23 +28,14 @@ class Home extends React.Component{
         let roomId = this.genId(6);
         // make callback to make sure this key is unique
         // ... 
-        this.setState({
-            roomId,
-            createRoom: true
-        });
+        this.props.history.push("/host/" + roomId); // this only works if component is passed in as prop to <Route/>
     }
     
     joinRoom = (e) => {
         e.preventDefault();
-        this.setState({
-            joinRoom: true
-        });
     }
 
     render(){
-        if(this.state.joinRoom && !this.state.createRoom){
-            return <Redirect to="/join"/>;
-        }
         if(!this.state.joinRoom && this.state.createRoom){
             return <Redirect to={"/host/"+ this.state.roomId}/>;
         }
@@ -52,7 +43,7 @@ class Home extends React.Component{
             <div className="Home">
                 <div className="ui card">
                     <div className="content">
-                        Welcome To Rhythum
+                        Welcome To Rhythm
                     </div>
                     <div>
                         <img className="App-logo" src={reactLogo} alt="logo"/>
