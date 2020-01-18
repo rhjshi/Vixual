@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 
 
 class SearchBar extends React.Component{
@@ -7,15 +6,10 @@ class SearchBar extends React.Component{
         input: ''
     }
 
-    changeURL = e => {
-        e.preventDefault();
-        console.log(this.props.history);
-        console.log(this.props.params);
-        // this.props.history.push("/yeet/more");
-        // this.setState({
-        //     redirect: true
-        // });
-            
+    handleChange = e => {
+        this.setState({
+            input: e.target.value
+        }); 
     }
 
 
@@ -23,7 +17,7 @@ class SearchBar extends React.Component{
         return(
             <div className="ui icon input">
                 <i className="search icon"></i>
-                <input type="text" placeholder="Search..."/>
+                <input type="text" value={this.state.input} onChange={this.handleChange} placeholder="Search..."/>
             </div>
         );
     }

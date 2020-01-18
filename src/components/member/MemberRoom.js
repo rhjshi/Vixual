@@ -1,5 +1,7 @@
 import React from 'react';
 import SearchBar from './SearchBar';
+import "./Member.css";
+
 
 class MemberRoom extends React.Component{
     constructor(props){
@@ -9,10 +11,12 @@ class MemberRoom extends React.Component{
     
     render(){
         return(
-            
-                <SearchBar />
-
-
+            <div className="member-room">
+                <div className="search-bar ui segment">
+                    <SearchBar />
+                </div>
+                
+            </div>
         );
     }
 }
