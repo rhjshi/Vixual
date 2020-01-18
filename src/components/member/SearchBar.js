@@ -22,7 +22,7 @@ class SearchBar extends React.Component{
     render(){
         return(
             <form onSubmit={this.onSubmit}>
-                <div className="ui icon input">
+                <div className="ui inverted transparent icon input">
                     <i className="search icon"></i>
                     <input type="text" value={this.state.input} onChange={this.handleChange} placeholder="Search..."/>
                 </div>
