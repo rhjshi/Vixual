@@ -45,6 +45,7 @@ class Home extends React.Component{
                     <div className="content">
                         Welcome To Rhythm
                     </div>
+                    
                     <div>
                         <img className="App-logo" src={reactLogo} alt="logo"/>
                     </div>

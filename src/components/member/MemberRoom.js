@@ -1,4 +1,5 @@
 import React from 'react';
+import SearchBar from './SearchBar';
 
 class MemberRoom extends React.Component{
     constructor(props){
@@ -7,8 +8,13 @@ class MemberRoom extends React.Component{
     }
     
     render(){
-        return null;
+        return(
+            
+                <SearchBar />
+
+
+        );
     }
 }
 
-export default MemberRoom
+export default MemberRoom;

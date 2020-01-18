@@ -1,5 +1,5 @@
 import React from 'react';
-import "./App.css";
+import "./Member.css";
 
 
 class JoinRoom extends React.Component{
@@ -25,7 +25,7 @@ class JoinRoom extends React.Component{
 
     render(){
         return (
-            <div className="Home">
+            <div className="Main">
                  <div className="ui card">
                     <div className="content">
                     <h3 className="ui header">Enter Room Key</h3>

@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 class SearchBar extends React.Component{
     state = {
-        redirect: false
+        input: ''
     }
 
     changeURL = e => {
@@ -20,10 +20,12 @@ class SearchBar extends React.Component{
 
 
     render(){
-        if(this.state.redirect){
-            return <Redirect to="/host"></Redirect>
-        }
-        return(<button onClick={this.changeURL}>Create Room</button>);
+        return(
+            <div className="ui icon input">
+                <i className="search icon"></i>
+                <input type="text" placeholder="Search..."/>
+            </div>
+        );
     }
 
 }
