@@ -12,13 +12,21 @@ class SearchBar extends React.Component{
         }); 
     }
 
+    onSubmit = e => {
+        e.preventDefault();
+        this.props.sendSearch(this.state.input);
+    }
+
+
 
     render(){
         return(
-            <div className="ui icon input">
-                <i className="search icon"></i>
-                <input type="text" value={this.state.input} onChange={this.handleChange} placeholder="Search..."/>
-            </div>
+            <form onSubmit={this.onSubmit}>
+                <div className="ui icon input">
+                    <i className="search icon"></i>
+                    <input type="text" value={this.state.input} onChange={this.handleChange} placeholder="Search..."/>
+                </div>
+            </form>
         );
     }
 
