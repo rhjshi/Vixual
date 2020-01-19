@@ -21,11 +21,12 @@ io.on('connection', function(socket) {
 
     socket.on('error', function() {});
 
-    socket.on('query', function(data) {
-        console.log(data)
+    socket.on('query', q =>  {
+        console.log("got:", q);
+        io.emit('sendmsg', q);
     });
 
-    socket.on("disconnect", function() {
+    socket.on("disconnect", () => {
         console.log("user disconnected");
     });
 });

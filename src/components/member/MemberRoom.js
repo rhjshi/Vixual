@@ -2,6 +2,7 @@ import React from 'react';
 import SearchBar from './SearchBar';
 import "./Member.css";
 import axios from 'axios';
+import ResultListItem from './ResultListItem';
 
 import socketIOClient from 'socket.io-client';
 
@@ -11,8 +12,12 @@ class MemberRoom extends React.Component{
         super(props);
         console.log(this.props.match.params);
         this.state = {
-            socket: socketIOClient("http://localhost:3000")
+            socket: socketIOClient("http://localhost:3000"),
+            results: [{},{},{},{}]
         }
+        this.state.socket.on('sendmsg', (q) => {
+            console.log(`received ${q}`);
+        })
     }
 
     /*componentDidMount() {
@@ -32,7 +37,7 @@ class MemberRoom extends React.Component{
     });
 
     getSearch = q => {
-        this.state.socket.emit('query', 'test andy');
+        this.state.socket.emit('query', q);
         this.api.get('v1/search/', {
             params:{
                 q,
@@ -44,19 +49,32 @@ class MemberRoom extends React.Component{
         }).then(response => {
             console.log('Received resp form Spot API');
             console.log(response.data.tracks.items);
+            this.setState({
+                results: response.data.tracks.items
+            });
         }).catch(err => {
-            console.error(err);
+            // console.error(err);
         });
         
     }
 
     render(){
+        let list = this.state.results.map((song, index) => {
+            return <ResultListItem key={index} song={song}/>;
+        });
         return(
             <div className="member-room">
-                <div className="search-bar ui segment">
-                    <SearchBar sendSearch={this.getSearch}/>
+                <div className="center-card">
+                    
+                    <div className="ui inverted segment">
+                        <SearchBar sendSearch={this.getSearch}/>
+                        <div className="ui inverted divider" />
+                        <div className="ui inverted relaxed divided list">
+                            {list}
+                        </div>
+                    </div>
+                    
                 </div>
-                
             </div>
         );
     }
