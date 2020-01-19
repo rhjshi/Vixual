@@ -3,12 +3,23 @@ import SearchBar from './SearchBar';
 import "./Member.css";
 import axios from 'axios';
 
+import socketIOClient from 'socket.io-client';
+
 
 class MemberRoom extends React.Component{
     constructor(props){
         super(props);
         console.log(this.props.match.params);
+        this.state = {
+            socket: socketIOClient("http://localhost:3000")
+        }
     }
+
+    /*componentDidMount() {
+        const { endpoint } = this.state;
+        const socket = socketIOClient(endpoint);
+        socket.on("test", data => this.setState({ response: data }));
+    }*/
 
     KEY = 'BQDA0jDvVR8Qps9vOiKeDc53AaJgicDQu22pWffayiEWk9DJyUG9uDrlGeBPbcT4GHnm94fJqyVufFKXkrEbQfEPQdz5RVQP0rnPdgx7RHaO3Ol2Q_jE5_7V6mlDfboDrGZXq6Tqwwoy-N0';
 
@@ -21,6 +32,7 @@ class MemberRoom extends React.Component{
     });
 
     getSearch = q => {
+        this.state.socket.emit('query', 'test andy');
         this.api.get('v1/search/', {
             params:{
                 q,
@@ -35,7 +47,7 @@ class MemberRoom extends React.Component{
         }).catch(err => {
             console.error(err);
         });
-        ;
+        
     }
 
     render(){
