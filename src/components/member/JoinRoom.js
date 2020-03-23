@@ -1,6 +1,4 @@
 import React from 'react';
-import "./Member.css";
-
 
 class JoinRoom extends React.Component{
 	constructor(props){
