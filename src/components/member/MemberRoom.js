@@ -26,7 +26,6 @@ class MemberRoom extends React.Component{
 		this.socket.emit('yeet', {
 			tracks: 'asdf'
 		});
-		console.log('afsdfasd')
 		// api.get('v1/search/', {
 		// 	params:{
 		// 		q,

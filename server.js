@@ -25,6 +25,10 @@ io.on('connection', client => {
   client.on('create_room', payload => {
     console.log('TEST123', payload);
   });
+
+  client.on('yeet', payload => {
+    console.log('yeet', payload);
+  })
 });
 
 server.listen(port, () => console.log(`Listening to ${port}`));

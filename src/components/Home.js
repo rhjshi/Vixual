@@ -3,7 +3,10 @@ import socketIO from 'socket.io-client';
 import "./App.css";
 import reactLogo from "../logo.svg";
 
+// note socket io will 'connect' everytime you make socketIO call
 const ENDPOINT = (process.env.BASE_URL + process.env.PORT) || 'localhost:4001';
+const socket = socketIO(ENDPOINT);
+
 
 const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 // have component that makes callback for roomId and stuff, don't use redirect use link
@@ -17,13 +20,12 @@ const genId = length => {
 }
 
 class Home extends React.Component{
-	socket = socketIO(ENDPOINT);
 
 	createRoom = e => {
 		e.preventDefault();
 		// make callback to make sure this key is unique
 		let roomId = genId(6);
-		this.socket.emit('create_room', { 
+		socket.emit('create_room', { 
 			msg: 'test123'
 		});
 		// this only works if component is passed in as prop to <Route/>
