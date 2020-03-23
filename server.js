@@ -22,8 +22,8 @@ io.on('connection', client => {
     console.log('user disconnected');
   });
 
-  client.on('test emit', () => {
-    console.log('TEST123');
+  client.on('create_room', payload => {
+    console.log('TEST123', payload);
   });
 });
 
