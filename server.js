@@ -4,7 +4,7 @@ const http = require('http');
 const socketIO = require('socket.io');
 
 // our localhost port
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4001;
 
 const app = express();
 
@@ -16,10 +16,14 @@ const io = socketIO(server);
 
 // setup io connection
 io.on('connection', client => {
-  console.log('user Connected');
+  console.log('user connected');
 
   client.on('disconnect', () => {
     console.log('user disconnected');
+  });
+
+  client.on('test emit', () => {
+    console.log('TEST123');
   });
 });
 
