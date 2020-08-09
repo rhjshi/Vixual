@@ -2,6 +2,7 @@ import React from 'react';
 import SearchBar from './SearchBar';
 import "./Member.css";
 import axios from 'axios';
+import VideoItems from './VideoItems';
 
 
 class MemberRoom extends React.Component{
@@ -10,28 +11,27 @@ class MemberRoom extends React.Component{
         console.log(this.props.match.params);
     }
 
-    KEY = 'BQDA0jDvVR8Qps9vOiKeDc53AaJgicDQu22pWffayiEWk9DJyUG9uDrlGeBPbcT4GHnm94fJqyVufFKXkrEbQfEPQdz5RVQP0rnPdgx7RHaO3Ol2Q_jE5_7V6mlDfboDrGZXq6Tqwwoy-N0';
+    state = {
+        videos: []
+    }
 
-    api = axios.create({
-        baseURL: 'https://api.spotify.com/',
-        headers: {
-            'Authorization': 'Bearer '+this.KEY,
-    	}
+    KEY = "AIzaSyAaRcZkRc1u3fSFFPN2GQTWjuYc7pDIQtw";
 
-    });
-
-    getSearch = q => {
-        this.api.get('v1/search/', {
-            params:{
-                q,
-                type: 'track',
-                market: 'US',
-                limit: 10,
-                offset: 0
-            }
-        }).then(response => {
-            console.log('Received resp form Spot API');
-            console.log(response.data.tracks.items);
+    getSearch = input => {
+        console.log(input)
+        axios.get("https://www.googleapis.com/youtube/v3/search", {
+            params: {
+              part: "snippet",
+              maxResults: 5,
+              key: this.KEY,
+              type: "video",
+              q: input
+            },
+          }
+        ).then(response => {
+            console.log('Received response form Youtube API');
+            console.log(response.data.items);
+            this.setState({videos: response.data.items});
         }).catch(err => {
             console.error(err);
         });
@@ -43,6 +43,7 @@ class MemberRoom extends React.Component{
             <div className="member-room">
                 <div className="search-bar ui segment">
                     <SearchBar sendSearch={this.getSearch}/>
+                    <VideoItems videos={this.state.videos}/>
                 </div>
                 
             </div>
