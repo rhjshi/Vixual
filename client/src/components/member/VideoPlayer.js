@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactPlayer from "react-player/youtube"
+import ReactPlayer from "react-player"
 
 class VideoPlayer extends Component {
     //need to handle when someone joins, need to display and start playing the video
@@ -20,12 +20,12 @@ class VideoPlayer extends Component {
                     ? <ReactPlayer url={`https://www.youtube.com/watch?v=${this.props.videoId}`} 
                         rel={0} 
                         controls={true}
-                        ref={(player) => {this.player = player}}
                         playing={this.props.playPause}
                         onPlay={this.handleOnPlay}
                         onPause={this.handleOnPause}
                         onBuffer={this.handleOnPause}
                         onBufferEnd={this.handleOnPlay}
+                        onError={(e) => {console.log(e)}}
                         />
                     : <p>Select A Video</p>
                 }
