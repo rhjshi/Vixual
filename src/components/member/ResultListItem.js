@@ -2,19 +2,21 @@ import React from "react";
 import "./Member.css"
 
 
-class ResultListItem extends React.Component {
-    render (){
-        return(
+// class ResultListItem extends React.Component {
+//     render (){
+const ResultListItem = props => {  
+      return(
           <div className="item">
-            <i className ="music icon"/>
+            <img className="ui image thumbnail-img" src={props.video.snippet.thumbnails.medium.url} alt="thumbnail"/>
             <div className="content">
                 <div className="header">
-                    SongTitle
+                    {props.video.snippet.title}
                 </div>
             </div>
           </div>  
         );
-    }  
-}
+      }
+//     }  
+// }
 
 export default ResultListItem;

@@ -1,11 +1,11 @@
 import React from 'react';
 import SearchBar from './SearchBar';
 import "./Member.css";
-import axios from 'axios';
+import youtubeApi from '../youtube';
 import ResultListItem from './ResultListItem';
+import axios from 'axios';
 
 import socketIOClient from 'socket.io-client';
-
 
 class MemberRoom extends React.Component{
     constructor(props){
@@ -13,54 +13,35 @@ class MemberRoom extends React.Component{
         console.log(this.props.match.params);
         this.state = {
             socket: socketIOClient("http://localhost:3000"),
-            results: [{},{},{},{}]
+            results: []
         }
         this.state.socket.on('sendmsg', (q) => {
             console.log(`received ${q}`);
         })
     }
 
-    /*componentDidMount() {
-        const { endpoint } = this.state;
-        const socket = socketIOClient(endpoint);
-        socket.on("test", data => this.setState({ response: data }));
-    }*/
-
-    KEY = 'BQDA0jDvVR8Qps9vOiKeDc53AaJgicDQu22pWffayiEWk9DJyUG9uDrlGeBPbcT4GHnm94fJqyVufFKXkrEbQfEPQdz5RVQP0rnPdgx7RHaO3Ol2Q_jE5_7V6mlDfboDrGZXq6Tqwwoy-N0';
-
-    api = axios.create({
-        baseURL: 'https://api.spotify.com/',
-        headers: {
-            'Authorization': 'Bearer '+this.KEY,
-    	}
-
-    });
+    
 
     getSearch = q => {
-        this.state.socket.emit('query', q);
-        this.api.get('v1/search/', {
-            params:{
-                q,
-                type: 'track',
-                market: 'US',
-                limit: 10,
-                offset: 0
-            }
-        }).then(response => {
-            console.log('Received resp form Spot API');
-            console.log(response.data.tracks.items);
+        youtubeApi.get('/search', { q })
+        .then(response => {
+            console.log('Received resp form YT API', response.data.items);
             this.setState({
-                results: response.data.tracks.items
+                results: [] 
+            })
+            this.setState({
+                results: response.data.items
             });
         }).catch(err => {
-            // console.error(err);
+            console.error('Could not get YTApi', err);
         });
-        
+
+        this.state.socket.emit('query', q);
     }
 
     render(){
-        let list = this.state.results.map((song, index) => {
-            return <ResultListItem key={index} song={song}/>;
+        let list = this.state.results.map((v, index) => {
+            return <ResultListItem key={index} video={v}/>;
         });
         return(
             <div className="member-room">
