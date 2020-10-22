@@ -1,5 +1,10 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Installation
+
+Run `npm install --no-optional` on non mac to avoid warnings for fsevents
+
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -11,6 +16,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
+
+### `sudo npm start`
+
+Runs the app with superuser permission on unix based systems 
+in order for file watching to occur and the server to start 
 
 ### `npm test`
 

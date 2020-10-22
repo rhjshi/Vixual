@@ -19,6 +19,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('selectedVideo', (data) => {
+        console.log("slefjlsdkfsjl");
         let videoId = data.video.id.videoId;
         let roomId = data.roomId
         io.sockets.in(roomId).emit('setVideo', videoId);

@@ -8,6 +8,8 @@ import io from 'socket.io-client'
 //import { use } from '../../../../server/router';
 let socket;
 
+const KEY = "AIzaSyA-tZyNqz3p1zVE8l0jF9M1ahKklc0lT78";
+
 function MemberRoom(props){
     const roomId = props.match.params.id;
 
@@ -17,8 +19,6 @@ function MemberRoom(props){
     const [playPause, setPlayPause] = useState(false)
 
     const ENDPOINT = 'localhost:5000';
-
-    const KEY = "AIzaSyAaRcZkRc1u3fSFFPN2GQTWjuYc7pDIQtw";
 
     const getSearch = (input) => {
         //console.log(input)
@@ -44,6 +44,7 @@ function MemberRoom(props){
     //this should add selected video to a queue,
     //and have play video socket after we have a queue
     const handleSelectedVideo = (video) => {
+        
         socket.emit('selectedVideo', {video, roomId});
     }
 
