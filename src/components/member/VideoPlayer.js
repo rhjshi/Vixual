@@ -11,14 +11,14 @@ class VideoPlayer extends Component {
     handleOnPause = () => {
         this.props.emitPlayPause(false,this.props.roomId);
     }
-    
  
     render() {
         return (
             <div>
-                {(this.props.videoId !== '') 
-                    ? <ReactPlayer url={`https://www.youtube.com/watch?v=${this.props.videoId}`} 
-                        rel={0} 
+                {/* {(this.props.videoId !== '')  */}
+                    ? <ReactPlayer url={`https://www.youtube.com/watch?v=Y-ANYwGYBjs`} 
+                    // ? <ReactPlayer url={`https://www.youtube.com/watch?v=${this.props.videoId}`} 
+                    rel={0} 
                         controls={true}
                         playing={this.props.playPause}
                         onPlay={this.handleOnPlay}
